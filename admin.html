@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | Автомагазин</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    
+    <div id="login-screen" style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #2c3e50;">
+        <div style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 100%; max-width: 400px; text-align: center;">
+            <h2 style="margin-top: 0; color: #2c3e50; font-size: 24px;">Вход в админ-панель</h2>
+            <p style="color: #7f8c8d; margin-bottom: 20px;">Введите данные владельца</p>
+            
+            <form id="login-form" onsubmit="AdminApp.handleLogin(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="email" id="login-email" required placeholder="Email" style="padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+                <input type="password" id="login-password" required placeholder="Пароль" style="padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+                <button type="submit" id="login-btn" style="padding: 12px; background: #27ae60; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer;">Войти</button>
+            </form>
+            
+            <div id="login-error" style="color: #e74c3c; margin-top: 15px; display: none; font-weight: bold;">Неверный логин или пароль</div>
+        </div>
+    </div>
+
+    
+    <div class="admin-layout" id="admin-layout" style="display: none;">
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <aside class="admin-sidebar">
+            <div class="admin-logo">AutoshopAdmin</div>
+            <nav class="admin-nav" id="adminNav">
+                <a href="#" class="admin-nav__link is-active" data-page="orders">📦 Заказы</a>
+                <a href="#" class="admin-nav__link" data-page="parts">⚙️ Запчасти</a>
+                <a href="#" class="admin-nav__link" data-page="wheels">🛞 Шины и Диски</a>
+                <a href="#" class="admin-nav__link" data-page="dicts">📚 Справочники</a>
+                
+                <a href="#" class="admin-nav__link" data-page="guide" style="border-top: 1px solid #34495e; margin-top: 15px;">📖 Инструкция</a>
+                
+                <a href="#" onclick="AdminApp.handleLogout(event)" class="admin-nav__link" style="margin-top: auto; border-top: 1px solid #34495e; color: #e74c3c;">🚪 Выйти из панели</a>
+                
+                <a href="index.html" class="admin-nav__link" style="border-top: 1px solid #34495e;">🌍 Вернуться на сайт</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-header" style="display: flex; align-items: center;">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <h1 id="admin-page-title" style="margin: 0;">Управление заказами</h1>
+            </header>
+            
+            <div class="admin-content" id="admin-content">
+                <div style="padding: 20px; color: #666;">Загрузка данных...</div>
+            </div>
+        </main>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/admin-core.js"></script>
+
+</html>

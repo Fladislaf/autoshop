@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Статус заказа | autoshop</title>
+    <style>
+        .status-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .container-main {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+
+        .status-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .status-input {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 60%;
+            font-size: 16px;
+        }
+
+        .status-btn {
+            padding: 12px 25px;
+            background: #00a4d6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .status-btn:hover {
+            background: #008cb5;
+        }
+
+        #resultBlock {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .status-new {
+            background: whitesmoke;
+            color: gray;
+        }
+
+        .status-processing {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-ready {
+            background: #e2d9f3;
+            color: #6f42c1;
+        }
+
+        .status-sent {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <div class="container-main">
+            <div class="status-container">
+                <h1 style="font-size: 24px; margin-bottom: 10px;">Проверка статуса заказа</h1>
+                <p style="color: #666; font-size: 15px;">Введите номер вашего заказа, который вы получили при оформлении
+                    <br>(например: n22nm33)</p>
+
+                <form id="statusForm" class="status-input-group">
+                    <input type="text" id="orderIdInput" class="status-input" placeholder="Номер заказа" required>
+                    <button type="submit" class="status-btn" id="checkBtn">Проверить</button>
+                </form>
+
+                <div id="resultBlock">
+                    <h3 style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">Информация о
+                        заказе</h3>
+                    <p style="margin-bottom: 8px;"><strong>Заказ:</strong> #<span id="resOrderId"></span></p>
+                    <p style="margin-bottom: 8px;"><strong>Дата оформления:</strong> <span id="resOrderDate"></span></p>
+                    <p style="margin-bottom: 8px;"><strong>Сумма к оплате:</strong> <span id="resOrderTotal"></span> ₽
+                    </p>
+                    <div id="trackingBlock"
+                        style="display: none; margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px dashed #00a4d6;">
+                        <strong style="color: #333;">Код отслеживания (ТК):</strong>
+                        <span id="resTrackingCode"
+                            style="color: #00a4d6; font-weight: bold; font-size: 16px; letter-spacing: 1px; margin-left: 5px;"></span>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <span style="display: block; font-size: 13px; color: #888;">Текущий статус:</span>
+                        <div id="resOrderStatus" class="status-badge"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/load-components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/pages/status-page.js"></script>
+</body>
+
+</html>
